@@ -7,12 +7,22 @@
                 <small>Subheading</small>
             </h1>
             <?php 
-                $sql = "SELECT * FROM users WHERE id=1";
-                $result = $database->query($sql);
+                // To shorten the code by not using instanting the class everytime, static method is used
+                // $user = new User();
+                
+                // $result_set = $user->find_all_users();
+                $result_set = User::find_all_users();
 
-                $user_found = mysqli_fetch_array($result);
+                while($row = mysqli_fetch_array($result_set)) {
+                    
+                    echo $row['username'] . "<BR />";
+                }
+                
 
-                echo $user_found['username'];
+                $thisuser = User::find_user_by_id(1);
+                $found_user = mysqli_fetch_array($thisuser);
+                $user = User::instantiate($found_user);               
+                echo $user->username;
             ?>
         </div>
     </div>
