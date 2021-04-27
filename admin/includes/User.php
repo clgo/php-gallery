@@ -21,7 +21,26 @@ class User
 	}
 
 	public static function find_user_by_id($userid) {
-		return self::find_this_query("SELECT * FROM users WHERE id = $userid LIMIT 1");
+		$result_array = self::find_this_query("SELECT * FROM users WHERE id = $userid LIMIT 1");
+
+		return empty($result_array) ? false : array_shift($result_array);
+	}
+
+
+	public static function verify_user($username, $password) {
+		global $database;
+
+		$clean_username = $database->escape_string($username);
+		$clean_password = $database->escape_string($password);
+
+		$query = "SELECT * FROM users WHERE ";
+		$query .= "username = '{$clean_username}' ";
+		$query .= "and password = '{$clean_password}' ";
+		$query .= "Limit 1";
+
+		$result_array = self::find_this_query($query);	
+
+		return empty($result_array) ? false : array_shift($result_array);	
 	}
 
 
@@ -43,12 +62,13 @@ class User
 		foreach ($record as $attribute => $value) {
 			# code...
 			if($obj->has_the_attribute($attribute)) {
-				$obj->attribute = $value;
+				$obj->$attribute = $value;
 			}
 		}
 
 		return $obj;
 	}
+
 
 	private function has_the_attribute($attribute) {
 		$obj_properties = get_object_vars($this);

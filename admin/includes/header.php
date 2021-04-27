@@ -1,5 +1,7 @@
 <?php ob_start(); // Turn on Output buffering, For resolving redirection issue, if header function is used and this is not turn on, it will caused an issue.  ?>
-<?php include("init.php"); ?>
+<?php require_once("init.php"); ?>
+
+
 <!DOCTYPE html>
 
 

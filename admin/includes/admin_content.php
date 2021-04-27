@@ -11,18 +11,24 @@
                 // $user = new User();
                 
                 // $result_set = $user->find_all_users();
-                $result_set = User::find_all_users();
+                // $result_set = User::find_all_users();
 
-                while($row = mysqli_fetch_array($result_set)) {
-                    
-                    echo $row['username'] . "<BR />";
-                }
+                // foreach ($result_set as $result) {
+                //     # code...
+                //     echo $result->username . '<BR />';
+                // }
                 
 
-                $thisuser = User::find_user_by_id(1);
-                $found_user = mysqli_fetch_array($thisuser);
-                $user = User::instantiate($found_user);               
-                echo $user->username;
+                // $thisuser = User::find_user_by_id(1);
+                           
+                //  foreach ($thisuser as $result) {
+                //     # code...
+                //     echo $result->username . '<BR />';
+                // }
+
+                $found_user = User::find_user_by_id(1);
+                echo $found_user->username;
+
             ?>
         </div>
     </div>
